@@ -82,8 +82,8 @@ c radius is equal to
 44 14  px 74.6666
 45 15  px 74.6666
 c others
-100    pz  75
-101    pz -75
+100    pz  125
+101    pz -125
 102    cz  100
 
 c      *****DATA CARDS*****
@@ -114,7 +114,7 @@ c
 c      ===PARAMETERS===
 c
 mode   n
-kcode  50000 1.0 20 10000
+kcode  5000 1.0 20 100
 c      default print and dump; write MCTAL; limit run tape to 4 entries 
 prdmp  0 0 1 4 0 
 c      ===SOURCES===
@@ -130,10 +130,10 @@ fmesh104:n
        kmesh=0.1
        emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
 c      center fuel pin tally
-fmesh114:n
-       geom=rzt
-       origin=0 0 -75
-       imesh=0.5 iints=2
-       jmesh=75  jints=300
-       kmesh=1   kints=60
-       emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
+c fmesh114:n
+c        geom=rzt
+c        origin=0 0 -75
+c        imesh=0.5 iints=2
+c        jmesh=75  jints=300
+c        kmesh=1   kints=60
+c        emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
