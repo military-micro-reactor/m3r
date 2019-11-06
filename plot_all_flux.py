@@ -25,7 +25,7 @@ for i in range(len(xbins)):
 figure = plot.figure()
 plot.title("M3R Flux")
 axes = figure.add_subplot(2, 1, 1, projection='3d')
-axes.plot_surface(X, Y, fluxes[0], cmap=cm.coolwarm)
+axes.plot_surface(X, Y, fluxes[0]+fluxes[1], cmap=cm.coolwarm)
 
 axes = figure.add_subplot(2, 1, 2, projection='3d')
 axes.plot_surface(X, Y, fluxes[4], cmap=cm.coolwarm)
