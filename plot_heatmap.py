@@ -3,7 +3,7 @@ from mcnptools import Meshtal
 meshtally = Meshtal("k_eff/meshtal")
 
 from mpl_toolkits.mplot3d import axes3d
-
+from scipy.interpolate import griddata
 import matplotlib.pyplot as plot
 from matplotlib import cm
 import numpy as np
@@ -19,10 +19,10 @@ flux = np.zeros((len(xbins), len(ybins)))
 for i in range(len(xbins)):
     for j in range(len(ybins)):
         flux[i][j] = tally14.GetValue(i, j, 0, 0)
-
+Z = griddata((X, Y), flux, (xbins, ybins), method='cubic')
 
 figure = plot.figure()
 plot.title("M3R Thermal Flux")
-axes = figure.gca(projection='3d')
-surf = axes.plot_surface(X, Y, flux, cmap=cm.coolwarm)
+CS = plot.contourf(xbins, ybins, Z, 15, cmap=cm.coolwarm)
+plot.colorbar()
 plot.show()

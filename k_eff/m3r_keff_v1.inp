@@ -1,4 +1,4 @@
-Mobile Military Microreactor k_infinity Calculation v2
+Mobile Military Microreactor Multiplication Factor: Configuration 1
 c by AJ Fleming
 c 31.10.2019
 c
@@ -114,9 +114,10 @@ c
 c      ===PARAMETERS===
 c
 mode   n
-kcode  5000 1.0 20 100
-c      default print and dump; write MCTAL; limit run tape to 4 entries 
-prdmp  0 0 1 4 0 
+c      many particles and many cycles for good statistics
+kcode  20000 1.0 20 10000
+c      default print and dump; write MCTAL; limit run tape to 2 entries 
+prdmp  0 0 1 2 0 
 c      ===SOURCES===
 c
 c      ===TALLIES=== 
@@ -129,11 +130,12 @@ fmesh104:n
        jmesh=100 jints=500
        kmesh=0.1
        emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
+c
 c      center fuel pin tally
-c fmesh114:n
-c        geom=rzt
-c        origin=0 0 -75
-c        imesh=0.5 iints=2
-c        jmesh=75  jints=300
-c        kmesh=1   kints=60
-c        emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
+fmesh114:n
+       geom=rzt
+       origin=0 0 -125
+       imesh=0.5 iints=2
+       jmesh=125  jints=500
+       kmesh=1   kints=60
+       emesh=2.6e-8 5.0e-7 1.0e-5 3.0e-4 1 20
