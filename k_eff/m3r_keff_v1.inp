@@ -115,7 +115,7 @@ c      ===PARAMETERS===
 c
 mode   n
 c      many particles and many cycles for good statistics
-kcode  20000 1.0 20 10000
+kcode  75000 1.0 20 5000
 c      default print and dump; write MCTAL; limit run tape to 2 entries 
 prdmp  0 0 1 2 0 
 c      ===SOURCES===

@@ -23,6 +23,6 @@ for i in range(len(xbins)):
 
 figure = plot.figure()
 plot.title("M3R Thermal Flux")
-axes = figure.gca(projection='3d')
+axes = figure.add_subplot(111, projection='3d')
 surf = axes.plot_surface(X, Y, flux, cmap=cm.coolwarm)
 plot.show()
