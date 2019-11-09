@@ -20,11 +20,11 @@ c
 c
                     3 3 3 3 3   1 2 1 2 1   3
                      3 3 3 3   2 2 2 2 2 2   3
-		      3 3 3   1 2 2 2 2 2 1   3
+		      3 3 3   1 2 2 4 2 2 1   3
 		       3 3   2 2 2 1 1 2 2 2   3
-		        3   1 2 2 1 2 1 2 2 1   3
+		        3   1 2 4 1 2 1 4 2 1   3
 			 3   2 2 2 1 1 2 2 2   3 3
-			  3   1 2 2 2 2 2 1   3 3 3
+			  3   1 2 2 4 2 2 1   3 3 3
 			   3   2 2 2 2 2 2   3 3 3 3
 			    3   1 2 1 2 1   3 3 3 3 3
 c
@@ -55,7 +55,7 @@ c
 c surfaces 1-2 describe the fuel and coolant channels
 1      cz 1.5   $coolant channel; d=3cm
 2      cz 0.5   $fuel rod; d=1cm
-3      cz 
+3      cz 1.5   $control rod; d=3cm
 c
 c surfaces 20-25 describe a set of planes normal to a sphere
 c of radius x=2
@@ -114,10 +114,14 @@ c
 c graphite
 m3     6012 1
 c
+c boron carbide
+m4     5010 -0.16
+       5011 -0.64
+       6012 -0.20
 c      ===PARAMETERS===
 c
 mode   n
-kcode  50000 1.0 20 10000
+kcode  2000 1.0 20 120
 c      default print and dump; write MCTAL; limit run tape to 4 entries 
 prdmp  0 0 1 4 0 
 c      ===SOURCES===
