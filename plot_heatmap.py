@@ -8,11 +8,11 @@ from matplotlib.ticker import LogFormatter, LogLocator
 import numpy as np
 
 _J = 6.242e12
-recoverable_energy = 200/_J #recoverable energy per fission in joules
+recoverable_energy = 200/_J  # recoverable energy per fission in joules
 nu = 2.4
-reactor_power = 1.0e7       #reactor at 10MWt
+reactor_power = 1.0e7       # reactor at 10MWt
 I = nu*reactor_power/recoverable_energy
-bin_width=500/200.0
+bin_width = 500/200.0
 
 print("MCNP flux to actual flux factor is I={}".format(I))
 
@@ -30,7 +30,8 @@ for i in range(len(xbins)):
 
 figure, axes = plot.subplots()
 axes.set_title("M$^3$R Fast Flux Tally at 10MW$_t$")
-heatmap = axes.imshow(np.log10(thermal_flux+1), cmap=cm.coolwarm, origin='lower', interpolation='bilinear')
+heatmap = axes.imshow(np.log10(thermal_flux+1), cmap=cm.coolwarm,
+                      origin='lower', interpolation='bilinear')
 axes.set_xlabel("x-axis bin")
 axes.set_ylabel("y-axis bin")
 colorbar = figure.colorbar(heatmap, ax=axes)
