@@ -1,4 +1,3 @@
-from random import random
 from math import pi as _PI
 from math import hypot
 
@@ -69,7 +68,7 @@ class Particle:
         self.dz = z
 
     def volume(self):
-        return _PI * (4 / 3) * (self.total_radius)
+        return _PI * (4 / 3) * (self.total_radius)**3
 
     def intersects(self, other):
         """

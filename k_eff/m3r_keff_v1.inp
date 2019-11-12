@@ -103,15 +103,16 @@ c      ===MATERIALS===
 c 20 wt% enriched UCO fuel kernels; according to INL AGR-2 specs
 m1     92235 -0.2240
        92238 -0.6720
-       6000  -0.0178
+       6000.66c  -0.0178
        8016  -0.0862
 c
 c carbon dioxide
-m2     6012 1
+m2     6000.66c 1
        8016 2
 c
 c graphite
-m3     6012 1
+m3     6000.66c 1
+mt3 GRPH.60c
 c
 c      ===PARAMETERS===
 c
