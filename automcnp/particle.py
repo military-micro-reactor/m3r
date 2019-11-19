@@ -1,7 +1,7 @@
 from math import pi as _PI
 from math import hypot
 
-from .defaults import *
+from defaults import *
 
 
 # MEAN KERNEL PARAMETERS -- AGR-2 KERNELS
@@ -24,8 +24,8 @@ class Particle:
     def __init__(self,
                  kernel_rad=_kernel_radius,
                  kernel_density=_kernel_density,
-                 kernel_spec=((8016, _kernel_fraction_o), (6012,
-                                                           _kernel_fraction_c),
+                 kernel_spec=((8016, _kernel_fraction_o),
+                              (6012, _kernel_fraction_c),
                               (92238, _kernel_fraction_238u),
                               (92235, _kernel_fraction_235u)),
                  buffer_density=BUFFER_DENSITY,

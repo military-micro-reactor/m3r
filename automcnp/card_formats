@@ -9,3 +9,5 @@ COMPACT card
  Format:
   COMPACT n radius height binder_material fuel_particle_id pf
 
+The following flags in comments tell automcnp where to place generated cell and surface cards
+AUTOCELL, AUTOSURF, AUTOMATERIAL
