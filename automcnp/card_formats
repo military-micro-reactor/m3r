@@ -1,0 +1,11 @@
+automncp will read in a text file containing these cards and convert them into a file usable by MCNP6
+
+PARTICLE card
+ Format:
+  PARTICLE id outside_material kernel_material kernel_radius mbuff drbuff mipyc dripyc msic drsic mopyc dropyc
+
+
+COMPACT card
+ Format:
+  COMPACT n radius height binder_material fuel_particle_id pf
+
