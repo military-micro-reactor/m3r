@@ -113,8 +113,7 @@ c
 c
 c      fuel rod lattice cell
 20     3 -1.80   -1020 1021 -1022 1023 -1024 1025   imp:n=1 u=300 lat=1
-                                                    fill=0:0 0:0 -100:100
-						    200 200r
+                                                    fill=200
 c fuel rod
 21     0         -2000   imp:n=1 u=2 fill=300
 22     3 -1.80    2000   imp:n=1 u=2

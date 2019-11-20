@@ -4,12 +4,12 @@ c 19.11.2019
 c
 c      *****CELL CARDS*****
 c      default INL TRISO particle
-1      1 -10.4    -1000        imp:n=1 u=100
-2      4 -1.05    1000 -1001   imp:n=1 u=100
-3      4 -1.90    1001 -1002   imp:n=1 u=100
-4      5 -3.19    1002 -1003   imp:n=1 u=100
-5      4 -1.90    1003 -1004   imp:n=1 u=100
-6      3 -1.80    1004         imp:n=1 u=100
+1      1 -10.4    -1000        imp:n=1 u=100 $ fuel kernel
+2      4 -1.05    1000 -1001   imp:n=1 u=100 $ buffer carbon
+3      5 -1.90    1001 -1002   imp:n=1 u=100 $ inner pyc
+4      6 -3.19    1002 -1003   imp:n=1 u=100 $ silicon carbide layer
+5      7 -1.90    1003 -1004   imp:n=1 u=100 $ outer pyc
+6      3 -1.80    1004         imp:n=1 u=100 $ graphite binder
 c
 c      fuel compact filled to packing fraction 0.30
 c      there are 9 layers of particles modeled with URAN
@@ -113,12 +113,10 @@ c
 c
 c      fuel rod lattice cell
 20     3 -1.80   -1020 1021 -1022 1023 -1024 1025   imp:n=1 u=300 lat=1
-                                                    fill=0:0 0:0 -99:99
-						    200 198r
+                                                    fill=200
 c fuel rod
-21     0         -2000                              imp:n=1 fill=300
-                                                            u=2
-22     3 -1.80    2000                              imp:n=1 u=2
+21     0         -2000   imp:n=1 u=2 fill=300
+22     3 -1.80    2000   imp:n=1 u=2
 c coolant channel
 23     2 -0.100   -1     imp:n=1 u=1
 24     3 -1.80     1     imp:n=1 u=1
@@ -131,13 +129,13 @@ c
 c
                     3 3 3 3 3   2 2 2 2 2   3
                      3 3 3 3   2 1 2 2 1 2   3
-		      3 3 3   2 2 2 2 2 2 2   3
-		       3 3   2 2 2 2 2 2 2 2   3
-		        3   2 1 2 2 1 2 2 1 2   3
-			 3   2 2 2 2 2 2 2 2   3 3
-			  3   2 2 2 2 2 2 2   3 3 3
-			   3   2 1 2 2 1 2   3 3 3 3
-			    3   2 2 2 2 2   3 3 3 3 3
+                      3 3 3   2 2 2 2 2 2 2   3
+                       3 3   2 2 2 2 2 2 2 2   3
+                        3   2 1 2 2 1 2 2 1 2   3
+                         3   2 2 2 2 2 2 2 2   3 3
+                          3   2 2 2 2 2 2 2   3 3 3
+                           3   2 1 2 2 1 2   3 3 3 3
+                            3   2 2 2 2 2   3 3 3 3 3
 c
                               3 3 3 3 3 3 3 3 3 3 3
 c
@@ -153,7 +151,7 @@ c
 		       5  3 3 3 3  5 5
 		        5  3 3 3  5 5 5
 c
-                          5 5 5 5 5 5 5
+                          5 5 5 5 5 5 5 
 c
 c
 c      core configuration
@@ -168,7 +166,7 @@ c
 c surfaces 1-2 describe the fuel and coolant channels
 1      cz 1.5   $coolant channel; d=3cm
 c
-c surfaces 20-25 describe a hexagon
+c surfaces 20-25 describe a fuel or coolant channel cell
 20     px 2
 21 11  px 2
 22 12  px 2
@@ -176,7 +174,7 @@ c surfaces 20-25 describe a hexagon
 24 14  px 2
 25 15  px 2
 c
-c another hexagon
+c assembly hexagon
 30     py 16.1658
 31 11  py 16.1658
 32 12  py 16.1658
@@ -184,8 +182,7 @@ c another hexagon
 34 14  py 16.1658
 35 15  py 16.1658
 c
-c reactor core boundary planes
-c radius is equal to
+c reactor core boundary
 40     px 74.6666
 41 11  px 74.6666
 42 12  px 74.6666
@@ -216,7 +213,7 @@ c compact stack lattice surfaces
 1025   pz -0.6
 c fuel rod surfaces
 2000   cz  0.5
-c others
+c reactor ultimate boundary
 100   pz  119.4
 101   pz -119.4
 102   cz  100
@@ -252,9 +249,11 @@ mt3 GRPH.60c
 c
 c buffer carbon and inner/outer pyrolytic carbon layer
 m4     6000.66c 1
+m5     6000.66c 1
+m7     6000.66c 1
 c
 c silicon carbide layer
-m5     6000.66c 1
+m6     6000.66c 1
        14000    1
 c
 c      ===PARAMETERS===
