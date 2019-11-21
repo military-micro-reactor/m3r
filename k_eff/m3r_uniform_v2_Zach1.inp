@@ -189,8 +189,8 @@ c      *****SURFACE CARDS*****
 c
 c surfaces 1-2 describe the fuel and coolant channels
 1      cz 1.5   $coolant channel; d=3cm
-3      cz 1.5   $control rod; d=3cm
-4      cz 2.5   $Control rod structure d=5cm
+3      cz 1     $control rod; d=2cm
+4      cz 1.2   $Control rod structure d=2.4cm
 c
 c surfaces 20-25 describe a hexagon
 20     px 2
