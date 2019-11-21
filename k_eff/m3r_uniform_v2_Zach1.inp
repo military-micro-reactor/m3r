@@ -122,9 +122,10 @@ c fuel rod
 c coolant channel
 23     2 -0.100   -1     imp:n=1 u=1
 24     3 -1.80     1     imp:n=1 u=1
-c
+c control rod
 26     6 -2.52    -3          imp:n=1 u=4 $control rods
-27     3 -1.80     3          imp:n=1 u=4 
+27     7 -7.88     3 -4       imp:n=1 u=4 
+28     3 -1.80     4          imp:n=1 u=4 
 c
 c      fuel assembly lattice cell
 30     3 -1.80    -20 -23 -21 -24 -22 -25   imp:n=1 u=3 lat=2
@@ -132,8 +133,8 @@ c      fuel assembly lattice cell
 c
                    3 3 3 3 3 3 3 3 3 3 3
 c
-        3 3 3 3 3   2 2 2 2 2   3
-         3 3 3 3   2 1 2 2 1 2   3
+                    3 3 3 3 3   2 2 2 2 2   3
+                        3 3 3 3   2 1 2 2 1 2   3
           3 3 3   2 2 2 2 2 2 2   3
            3 3   2 2 2 2 2 2 2 2   3
             3   2 1 2 2 1 2 2 1 2   3
@@ -150,13 +151,13 @@ c      fuel assembly lattice cell
 c
                    3 3 3 3 3 3 3 3 3 3 3
 c
-                    3 3 3 3 3   2 2 2 2 2   3
-                     3 3 3 3   2 1 2 2 1 2   3
-              3 3 3   2 2 2 2 2 2 2   3
-               3 3   2 2 2 4 4 2 2 2   3
-                3   2 1 2 4 1 4 2 1 2   3
-             3   2 2 2 4 4 2 2 2   3 3
-              3   2 2 2 2 2 2 2   3 3 3
+        3 3 3 3 3   2 2 2 2 2   3
+         3 3 3 3   2 1 2 2 1 2   3
+          3 3 3   2 2 4 2 4 2 2   3
+           3 3   2 2 2 2 2 2 2 2   3
+            3   2 1 4 2 1 2 4 1 2   3
+             3   2 2 2 2 2 2 2 2   3 3
+              3   2 2 4 2 4 2 2   3 3 3
                3   2 1 2 2 1 2   3 3 3 3
                 3   2 2 2 2 2   3 3 3 3 3
 c
@@ -188,7 +189,8 @@ c      *****SURFACE CARDS*****
 c
 c surfaces 1-2 describe the fuel and coolant channels
 1      cz 1.5   $coolant channel; d=3cm
-3      cz 1.7   $control rod; d=3.4cm
+3      cz 1.5   $control rod; d=3cm
+4      cz 2.5   $Control rod structure d=5cm
 c
 c surfaces 20-25 describe a hexagon
 20     px 2
@@ -280,9 +282,27 @@ m5     6000.66c 1
        14000    1
 c
 c boron carbide
-m6     5010 -0.16
-       5011 -0.64
+m6     5010 -0.28
+       5011 -0.52
        6012 -0.20
+c
+c Stainless Steel according to Sandia Stainless steel 301
+m7     06000.80c 0.006871
+       24050.80c 0.007816
+       24052.80c 0.150726
+       24053.80c 0.017091
+       24054.80c 0.004254
+       25055.80c 0.020030
+       26054.80c 0.042528
+       26056.80c 0.667595
+       26057.80c 0.015418
+       26058.80c 0.002052
+       28058.80c 0.044672
+       28060.80c 0.017207
+       28061.80c 0.000748
+       28062.80c 0.002385
+       28064.80c 0.000607
+c
 c      ===PARAMETERS===
 c
 mode   n
