@@ -16,15 +16,15 @@ c      lattice cell
 c
                    3 3 3 3 3 3 3 3 3 3 3
 c
-                    3 3 3 3 3   1 2 1 2 1   3
-                     3 3 3 3   2 2 2 2 2 2   3
-		      3 3 3   1 2 2 2 2 2 1   3
-		       3 3   2 2 2 1 1 2 2 2   3
-		        3   1 2 2 1 2 1 2 2 1   3
-			 3   2 2 2 1 1 2 2 2   3 3
-			  3   1 2 2 2 2 2 1   3 3 3
-			   3   2 2 2 2 2 2   3 3 3 3
-			    3   1 2 1 2 1   3 3 3 3 3
+                    3 3 3 3 3   2 2 2 2 2   3
+                     3 3 3 3   2 1 2 2 1 2   3
+		      3 3 3   2 2 2 2 2 2 2   3
+		       3 3   2 2 2 2 2 2 2 2   3
+		        3   2 1 2 2 1 2 2 1 2   3
+			 3   2 2 2 2 2 2 2 2   3 3
+			  3   2 2 2 2 2 2 2   3 3 3
+			   3   2 1 2 2 1 2   3 3 3 3
+			    3   2 2 2 2 2   3 3 3 3 3
 c
                               3 3 3 3 3 3 3 3 3 3 3
 c
@@ -35,27 +35,24 @@ c      assembly boundary cell
 c      *****SURFACE CARDS*****
 c
 c surfaces 1-2 describe the fuel and coolant channels
-1      cz 1.5   $coolant channel; d=3cm
+1      cz 1   $coolant channel; d=3cm
 2      cz 0.5   $fuel rod; d=1cm
 c
-c surfaces 20-25 describe a set of planes normal to a sphere
-c of radius x=2
-c rotated in 60 degree increments from the x axis
-20     px 2
-21 11  px 2
-22 12  px 2
-23 13  px 2
-24 14  px 2
-25 15  px 2
+c surfaces 20-25 describe a fuel or coolant channel cell
+20     px 1.2
+21 11  px 1.2
+22 12  px 1.2
+23 13  px 1.2
+24 14  px 1.2
+25 15  px 1.2
 c
-c set of planes normal to sphere of radius 16.1658
-c 60 degree increments from y axis
-*30     py 16.1658
-*31 11  py 16.1658
-*32 12  py 16.1658
-*33 13  py 16.1658
-*34 14  py 16.1658
-*35 15  py 16.1658
+c assembly hexagon
+*30     py 9.69948
+*31 11  py 9.69948
+*32 12  py 9.69948
+*33 13  py 9.69948
+*34 14  py 9.69948
+*35 15  py 9.69948
 c others
 100    pz  50
 101    pz -50

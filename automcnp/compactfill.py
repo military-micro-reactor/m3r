@@ -136,4 +136,4 @@ if __name__ == '__main__':
     print(
         generate_fill_lattice(default_particle.total_radius,
                               default_particle.volume(), compact_r, compact_h,
-                              0.30))
+                              0.35))
