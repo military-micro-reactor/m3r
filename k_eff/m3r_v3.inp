@@ -8,9 +8,10 @@ c   u2: fuel compact internal lattice
 c   u3: fuel compact lattice
 c   u4: fuel rod
 c   u5: coolant channel
-c   u6: control rod
-c   u7: fuel prism
-c   u9: reactor core
+c   u6: fuel assembly
+c   u7: reactor core
+c   u8: control assembly
+c   u9: control rod
 c      *****CELL CARDS*****
 c      default INL TRISO particle
 1      1 -10.4   -1      imp:n=1  u=1 $ fuel kernel
@@ -127,7 +128,10 @@ c      unit fuel rod
 22     3 -1.80    40                    imp:n=1 u=4
 c
 c      unit control rod
-c
+30     8 -2.52    -32 34             imp:n=1 u=9 $ control rod meat
+31     9 -7.88     33 -31 (-34:32)   imp:n=1 u=9 $ control rod cladding
+32     2 -0.10    -30 (-33:31)       imp:n=1 u=9 $ control rod gap
+33     3 -1.80     30                imp:n=1 u=9 $ graphite fill
 c      unit coolant channel
 40     2 -0.10   -41   imp:n=1 u=5
 41     3 -1.80    41   imp:n=1 u=5
@@ -148,27 +152,57 @@ c
 	         6  4 4 4 4 4  6 6 6 6 6
                   6 6 6 6 6 6 6 6 6 6 6
 c
+c      control assembly lattice cell
+55     3 -1.80   -50 -53 -51 -54 -52 -55 imp:n=1 u=8 lat=2
+                                         fill=-5:5 -5:5 0:0
+c
+        8 8 8 8 8 8 8 8 8 8 8
+         8 8 8 8 8  4 4 4 4 4  8
+          8 8 8 8  4 5 4 4 5 4  8
+	   8 8 8  4 4 9 4 9 4 4  8
+	    8 8  4 4 4 4 4 4 4 4  8
+	     8  4 5 9 4 5 4 9 5 4  8
+	      8  4 4 4 4 4 4 4 4  8 8
+	       8  4 4 9 4 9 4 4  8 8 8
+	        8  4 5 4 4 5 4  8 8 8 8
+	         8  4 4 4 4 4  8 8 8 8 8
+                  8 8 8 8 8 8 8 8 8 8 8
+c
 c      reactor core lattice cell
 60     3 -1.80   -60 -63 -61 -64 -62 -65 imp:n=1 u=7 lat=2
                                          fill=-3:3 -3:3 0:0
         7 7 7 7 7 7 7
 	 7 7 7  6 6 6  7
-	  7 7  6 6 6 6  7
-	   7  6 6 6 6 6  7
-	    7  6 6 6 6  7 7
+	  7 7  6 6 8 6  7
+	   7  6 8 6 6 6  7
+	    7  6 6 8 6  7 7
 	     7  6 6 6  7 7 7
 	      7 7 7 7 7 7 7
 c
 c      reactor core cell
-70     3 -1.80   -70 -71 -72 -73 -74 -75 76 -77        imp:n=1 fill=7
+70     3 -1.80   -70 -71 -72 -73 -74 -75 76 -77   imp:n=1 fill=7
 c
 c      core reflector cell
 80     3 -1.80   (70:71:72:73:74:75:-76:77) -80 81 -82 imp:n=1
 c
-c      shielding cells
-90     
-c      problem boundary cell
-9999   0          990:991:-992     imp:n=0
+c      vessel and shielding cells
+90     9  -7.88   (80:-81:82) -90 91 -92         imp:n=1
+91     8  -2.52   (90:-91:92) -100 101 -102      imp:n=1
+92     10 -19.0   (100:-101:102) -110 111 -112   imp:n=1
+c
+c      container interior cell
+100    0   (110:-111:112) 120 -121 122 -123 124 -125 imp:n=1
+c
+c      container lead shield
+110    11 -11.0  (-120:121:-122:123:-124:125)
+                  130 -131 132 -133 134 -135  imp:n=1
+c
+c      container
+120    9 -7.88   (-130:131:-132:133:-134:135)
+                  140 -141 142 -143 144 -145  imp:n=1
+c
+c      problem boundary
+9999   0 (-140:141:-142:143:-144:145) imp:n=0
 
 c      *****SURFACE CARDS*****
 c
@@ -196,10 +230,22 @@ c fuel pellet lattice surfaces
 25     pz -0.6
 c
 c control rod surfaces
-c not yet implemented
+30     cz  1.2  $ control rod channel surface
+31     cz  1.18 $ outer control rod surface
+32     cz  1    $ inner control rod surface
+c
+c      inserted control rods
+c           0%      100%
+c surf 33  -119     118.96
+c surf 34  -118.96  119
+c
+33     pz  118.96  $ control rod insertion
+34     pz  119 $ control rod insertion inner surface
 c
 c fuel rod; coolant channel
 c fuel rod is slightly larger than 1.0cm diameter to prevent lost particle issues
+c this does not affect modeling due to the assumption that the binder is pure graphite
+c we will have to validate this later
 40     cz  0.5001
 41     cz  1
 c
@@ -235,29 +281,48 @@ c reflector surfaces
 82     pz  140
 c
 c reactor vessel surfaces
-90     cz  75  
+90     cz  80  
 91     pz -150
 92     pz  150
 c
 c b4c shielding surfaces
-100    cz  95 $outer b4c surface
+100    cz  90 $outer b4c surface
 101    pz -170
 102    pz  170
 c
 c tungsten shielding surfaces
-110    cz  105 $outer tungsten surface
+110    cz  100 $outer tungsten surface
 111    pz -180
 112    pz  180
 c
-c container lead shield surfaces
-120    px -150
-121    px  150
-122    py -150
-123    py  150
-124    pz -700
-125    pz  700
+c container lead shield inner surfaces
+120    px -100
+121    px  100
+122    py -100
+123    py  100
+124    pz -600
+125    pz  600
 c
-c container lead shield outer surfaces
+c container inner surfaces
+130    px -150
+131    px  150
+132    py -150
+133    py  150
+134    pz -650
+135    pz  650
+c
+c container outer surfaces
+140    px -152.7
+141    px  152.7
+142    py -152.7
+143    py  152.7
+144    pz -652.7
+145    pz  652.7
+c
+c water person surface
+150    s   200 0 0 20
+c
+9999   so  700
 
 c      *****DATA CARDS*****
 c
@@ -295,16 +360,110 @@ m6     6000.66c 1
        14000    1
 c
 c boron carbide shielding
-m8     6000.66c 
+m8     5010     -0.28
+       5011     -0.52
+       6000.66c -0.20
+c
+c stainless steel, according to Sandia
+m9     06000.66c 0.006871
+       24050.80c 0.007816
+       24052.80c 0.150726
+       24053.80c 0.017091
+       24054.80c 0.004254
+       25055.80c 0.020030
+       26054.80c 0.042528
+       26056.80c 0.667595
+       26057.80c 0.015418
+       26058.80c 0.002052
+       28058.80c 0.044672
+       28060.80c 0.017207
+       28061.80c 0.000748
+       28062.80c 0.002385
+       28064.80c 0.000607
+c
+c tungsten
+m10    74000   1
+c
+c lead
+m11    82000   1
+c water
+m12    1001    2
+       8016    1
+c
 c      ===PARAMETERS===
 c
-mode   n
-kcode  75000 1.0 20 2500
-ksrc   0 0 0
+mode   n p
+act fission=n,p
+kcode  1000 1.0 30 50
+ksrc 0 0 0
 lost 1
 c      default print and dump; write MCTAL; limit run tape to 2 entries 
 prdmp  0 0 1 2 0
 c      ===SOURCES===
 c
-c      ===TALLIES=== 
+c      ===TALLIES===
+c energy bins use 1 lethargy width near thermal energies
+c                 2 lethargy width between 5eV 100keV
+c                 3 lethargy width > 100keV
+c      BE SURE TO CONVERT TO FLUX PER UNIT LETHARGY
+c      BE SURE TO OVERRIDE ENERGY BINS FOR NON-NEUTRON TALLIES
+e0     1.49E-10  1.75E-10  2.05E-10  2.40E-10  2.81E-10
+       3.29E-10  3.85E-10  4.50E-10  5.27E-10  6.18E-10
+       7.23E-10  8.47E-10  9.91E-10  1.16E-09  1.36E-09
+       1.59E-09  1.86E-09  2.18E-09  2.55E-09  2.99E-09
+       3.50E-09  4.10E-09  4.80E-09  5.62E-09  6.58E-09
+       7.71E-09  9.03E-09  1.06E-08  1.24E-08  1.45E-08
+       1.70E-08  1.99E-08  2.33E-08  2.72E-08  3.19E-08
+       3.73E-08  4.37E-08  5.12E-08  5.99E-08  7.02E-08
+       8.22E-08  9.62E-08  1.13E-07  1.32E-07  1.54E-07
+       1.81E-07  2.12E-07  2.48E-07  2.90E-07  3.40E-07
+       3.98E-07  4.66E-07  5.46E-07  6.39E-07  7.48E-07
+       8.76E-07  1.03E-06  1.20E-06  1.93E-06  3.10E-06
+       4.97E-06  7.98E-06  1.28E-05  2.06E-05  3.30E-05
+       5.30E-05  7.26E-05  9.96E-05  1.37E-04  1.87E-04
+       2.57E-04  3.52E-04  4.82E-04  6.61E-04  9.07E-04
+       1.24E-03  1.70E-03  2.34E-03  3.20E-03  4.39E-03
+       6.02E-03  8.25E-03  1.13E-02  1.55E-02  2.13E-02
+       2.92E-02  4.00E-02  5.48E-02  7.51E-02  1.03E-01
+       1.41E-01  2.27E-01  3.64E-01  5.84E-01  9.38E-01
+       1.51E+00  2.42E+00  3.88E+00  6.23E+00  1.00E+01
+c
+f102:n (80 81 82) (90 91 92) (100 101 102) (110 111 112)
+       (120 121 122 123 124 125) (130 131 132 133 134 135)
+       (140 141 142 143 144 145)
+fc102  neutron flux at all relevant shielding surfaces w/ default energy bins
+c
+f202:p (80 81 82) (90 91 92) (100 101 102) (110 111 112)
+       (120 121 122 123 124 125) (130 131 132 133 134 135)
+       (140 141 142 143 144 145)
+fc202  photon flux at all relevant shielding surfaces w/ one giant energy bin
+e202   1e9
+c
 c      ===MESH TALLIES===
+fmesh104:n 
+      geom=xyz
+      origin=-100 -100 -0.1
+      imesh=100 iints=500
+      jmesh=100 jints=500
+      kmesh=0.1
+      emesh=1.49E-10  1.75E-10  2.05E-10  2.40E-10  2.81E-10
+       3.29E-10  3.85E-10  4.50E-10  5.27E-10  6.18E-10
+       7.23E-10  8.47E-10  9.91E-10  1.16E-09  1.36E-09
+       1.59E-09  1.86E-09  2.18E-09  2.55E-09  2.99E-09
+       3.50E-09  4.10E-09  4.80E-09  5.62E-09  6.58E-09
+       7.71E-09  9.03E-09  1.06E-08  1.24E-08  1.45E-08
+       1.70E-08  1.99E-08  2.33E-08  2.72E-08  3.19E-08
+       3.73E-08  4.37E-08  5.12E-08  5.99E-08  7.02E-08
+       8.22E-08  9.62E-08  1.13E-07  1.32E-07  1.54E-07
+       1.81E-07  2.12E-07  2.48E-07  2.90E-07  3.40E-07
+       3.98E-07  4.66E-07  5.46E-07  6.39E-07  7.48E-07
+       8.76E-07  1.03E-06  1.20E-06  1.93E-06  3.10E-06
+       4.97E-06  7.98E-06  1.28E-05  2.06E-05  3.30E-05
+       5.30E-05  7.26E-05  9.96E-05  1.37E-04  1.87E-04
+       2.57E-04  3.52E-04  4.82E-04  6.61E-04  9.07E-04
+       1.24E-03  1.70E-03  2.34E-03  3.20E-03  4.39E-03
+       6.02E-03  8.25E-03  1.13E-02  1.55E-02  2.13E-02
+       2.92E-02  4.00E-02  5.48E-02  7.51E-02  1.03E-01
+       1.41E-01  2.27E-01  3.64E-01  5.84E-01  9.38E-01
+       1.51E+00  2.42E+00  3.88E+00  6.23E+00  1.00E+01
+fc104 mesh tally for neutron flux at the centerline
