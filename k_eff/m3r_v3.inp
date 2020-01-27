@@ -169,13 +169,14 @@ c
                   8 8 8 8 8 8 8 8 8 8 8
 c
 c      reactor core lattice cell
-60     3 -1.80   -60 -63 -61 -64 -62 -65 imp:n=1 u=7 lat=2
-                                         fill=-3:3 -3:3 0:0
+60     3 -1.80   -60 -63 -61 -64 -62 -65 imp:n=1 u=7
+                                         lat=2
+					 fill=-3:3 -3:3 0:0
         7 7 7 7 7 7 7
 	 7 7 7  6 6 6  7
-	  7 7  6 6 8 6  7
-	   7  6 8 6 6 6  7
-	    7  6 6 8 6  7 7
+	  7 7  6 6 6 6  7
+	   7  6 6 6 6 6  7
+	    7  6 6 6 6  7 7
 	     7  6 6 6  7 7 7
 	      7 7 7 7 7 7 7
 c
@@ -239,8 +240,8 @@ c           0%      100%
 c surf 33  -119     118.96
 c surf 34  -118.96  119
 c
-33     pz  118.96  $ control rod insertion
-34     pz  119 $ control rod insertion inner surface
+33     pz -29  $ control rod insertion
+34     pz -28.36 $ control rod insertion inner surface
 c
 c fuel rod; coolant channel
 c fuel rod is slightly larger than 1.0cm diameter to prevent lost particle issues
@@ -337,10 +338,10 @@ c 60 degree rotations from +x
 c
 c      ===MATERIALS===
 c 20 wt% enriched UCO fuel kernels; according to INL AGR-2 specs
-m1     92235     -0.2240
-       92238     -0.6720
+m1     92235     -0.1720
+       92238     -0.7169
        6000.66c  -0.0178
-       8016      -0.0862
+       8016      -0.0861
 c
 c carbon dioxide
 m2     6000.66c 1
@@ -393,7 +394,7 @@ c
 c      ===PARAMETERS===
 c
 mode   n
-kcode  1000 1.0 30 50
+kcode  2500 1.0 15 60
 ksrc 0 0 0
 lost 1
 c      default print and dump; write MCTAL; limit run tape to 2 entries 
