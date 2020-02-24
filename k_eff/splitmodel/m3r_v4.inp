@@ -1,0 +1,636 @@
+Military Micro-Reactor v4; Full Core Model
+c by AJ Fleming
+c 21.1.2020
+c
+c      *****UNIVERSE MAP****
+c   u1: fuel particle cells
+c   u2: fuel compact internal lattice
+c   u3: fuel compact lattice
+c   u4: fuel rod
+c   u5: coolant channel
+c   u6: fuel assembly
+c   u7: reactor core
+c   u8: control assembly
+c   u9: control rod
+c   u10: reactor core
+c   u20: burnable absorber particle cells
+c   u21: burnable absorber compact: region 1
+c   u22: burnable absorber compact: region 2
+c   u23: burnable absorber compcat: region 3
+c      *****CELL CARDS*****
+c      fuel particle numbering scheme
+c      first digit: fuel depletion region
+c      second digit: 0 for normal fuel, 1 for burnable absorber fuel
+c      third digit: particle section
+c      default INL TRISO particle
+1      1 -10.4   -1      imp:n=1  u=1 $ fuel kernel
+       vol=0.00141863
+2      4 -1.05    1 -2   imp:n=1  u=1 $ buffer carbon
+3      5 -1.90    2 -3   imp:n=1  u=1 $ inner pyc
+4      6 -3.19    3 -4   imp:n=1  u=1 $ silicon carbide layer
+5      7 -1.90    4 -5   imp:n=1  u=1 $ outer pyc
+6      3 -1.80    5      imp:n=1  u=1 $ graphite binder
+c
+c
+c      BURNABLE ABSORBER PARTICLE, EUROPIUM LAYER THICKNESS 10 um
+11      1  -10.4   -1      imp:n=1  u=20 $ fuel kernel
+12      20 -7.28    1 -7   imp:n=1  u=20 $ burnable poison layer
+13      4  -1.05    7 -2   imp:n=1  u=20 $ buffer carbon
+14      5  -1.90    2 -3   imp:n=1  u=20 $ inner pyc
+15      6  -3.19    3 -4   imp:n=1  u=20 $ silicon carbide layer
+16      7  -1.90    4 -5   imp:n=1  u=20 $ outer pyc
+17      3  -1.80    5      imp:n=1  u=20 $ graphite binder
+c
+c      DEPLETION REGIONS
+c
+c      fuel particle lattice cell
+20     3 -1.80   -10 11 -12 13 -14 15   imp:n=1 u=2
+                                        lat=1 fill=-6:6 -6:6 -7:7
+c      k=-7
+       2 168r
+c      k=-6
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k=-5
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k=-4
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k=-3
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k=-2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k=-1
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 0
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 1
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 3
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 4
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 5
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 6
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 1 1 1 1 1 1 1 1 1 1 1 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 1 1 1 1 1 1 1 1 1 2 2
+       2 2 2 1 1 1 1 1 1 1 2 2 2
+       2 2 2 2 2 1 1 1 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2 2 2 2 2
+c      k= 7
+       2 168r
+c
+c      fuel pellet lattice cell
+21     0         -20 21 -22 23 -24 25   imp:n=1 lat=1
+                                        fill=2 u=3
+c
+c      unit fuel rod
+22     0         -40                    imp:n=1 u=4 fill=3
+23     3 -1.80    40                    imp:n=1 u=4
+c
+c      unit control rod
+30     8 -2.52    -32 34             imp:n=1 u=9 $ control rod meat
+31     9 -7.88     33 -31 (-34:32)   imp:n=1 u=9 $ control rod cladding
+32     2 -0.10    -30 (-33:31)       imp:n=1 u=9 $ control rod gap
+33     3 -1.80     30                imp:n=1 u=9 $ graphite fill
+c      unit coolant channel
+40     2 -0.10   -41   imp:n=1 u=5
+41     3 -1.80    41   imp:n=1 u=5
+c
+c      fuel assembly lattice cell
+50     3 -1.80   -50 -53 -51 -54 -52 -55 imp:n=1 u=6 lat=2
+                                         fill=-5:5 -5:5 0:0
+c
+        6 6 6 6 6 6 6 6 6 6 6
+         6 6 6 6 6  4 4 4 4 4  6
+          6 6 6 6  4 5 4 4 5 4  6
+	   6 6 6  4 4 4 4 4 4 4  6
+	    6 6  4 4 4 4 4 4 4 4  6
+	     6  4 5 4 4 5 4 4 5 4  6
+	      6  4 4 4 4 4 4 4 4  6 6
+	       6  4 4 4 4 4 4 4  6 6 6
+	        6  4 5 4 4 5 4  6 6 6 6
+	         6  4 4 4 4 4  6 6 6 6 6
+                  6 6 6 6 6 6 6 6 6 6 6
+c
+c      control assembly lattice cell
+55     3 -1.80   -50 -53 -51 -54 -52 -55 imp:n=1 u=8 lat=2
+                                         fill=-5:5 -5:5 0:0
+c
+        8 8 8 8 8 8 8 8 8 8 8
+         8 8 8 8 8  4 4 4 4 4  8
+          8 8 8 8  4 5 4 4 5 4  8
+	   8 8 8  4 4 4 4 4 4 4  8
+	    8 8  4 4 4 4 4 9 4 4  8
+	     8  4 5 4 4 5 4 4 5 4  8
+	      8  4 4 4 4 4 4 4 4  8 8
+	       8  4 4 4 9 4 4 4  8 8 8
+	        8  4 5 4 4 5 4  8 8 8 8
+	         8  4 4 4 4 4  8 8 8 8 8
+                  8 8 8 8 8 8 8 8 8 8 8
+c
+c      reactor core lattice cell
+60     3 -1.80   -60 -63 -61 -64 -62 -65 imp:n=1 u=7
+                                         lat=2
+					 fill=-3:3 -3:3 0:0
+        7 7 7 7 7 7 7
+	 7 7 7  6 6 6  7
+	  7 7  6 6 8 6  7
+	   7  6 6 6 6 6  7
+	    7  6 6 6 6  7 7
+	     7  6 6 6  7 7 7
+	      7 7 7 7 7 7 7
+c
+c      reactor core cell
+c                reactor core boundary    top/bot   shrink cell
+70     3 -1.80   (-70 -71 -72 -73 -74 -75) (76 -77) $(1000 1001)
+                 imp:n=1 fill=7
+c
+c      core reflector cell
+80     3 -1.80   (70:71:72:73:74:75) (76 -77) -78 $(1000 1001)
+                 imp:n=1
+81     3 -1.80   (-76:77:78) -83 84 -85 $(1000 1001)
+                 imp:n=1
+82     3 -1.80   (-84:85:83) -80 81 -82 $(1000 1001)
+                 imp:n=1
+c
+c      problem boundary
+9999   0 (80:-81:82)$:(-1000:-1001)
+         imp:n=0
+
+c      *****SURFACE CARDS*****
+c
+c TRISO particle surfaces
+1      so  2.125e-2
+2      so  3.125e-2
+3      so  3.525e-2
+4      so  3.875e-2
+5      so  4.275e-2
+c
+c burnable poison layer
+7      so  2.225e-2
+c TRISO fuel lattice surfaces
+10     px  4.3853e-2
+11     px -4.3853e-2
+12     py  4.3853e-2
+13     py -4.3853e-2
+14     pz  4.3853e-2
+15     pz -4.3853e-2
+c
+c fuel pellet lattice surfaces
+20     px  0.5
+21     px -0.5
+22     py  0.5
+23     py -0.5
+24     pz  0.6
+25     pz -0.6
+c
+c control rod surfaces
+30     cz  1.2  $ control rod channel surface
+31     cz  1.18 $ outer control rod surface
+32     cz  1    $ inner control rod surface
+c
+c      inserted control rods
+c          100%     0%
+c
+c surf 33  -119     118.96
+c surf 34  -118.96  119
+c
+33     pz  118.96    $ control rod insertion
+34     pz  119 $ control rod insertion inner surface
+c
+c fuel rod
+c fuel rod is slightly larger than 1.0cm diameter to prevent lost particle issues
+c this does not affect modeling due to the assumption that the binder is pure graphite
+c we will have to validate this later
+40     cz  0.5000001
+c
+c coolant channel
+41     cz  1
+c
+c fuel assembly element surfaces
+50     px 1.2
+51 11  px 1.2
+52 12  px 1.2
+53 13  px 1.2
+54 14  px 1.2
+55 15  px 1.2
+c
+c fuel assembly surfaces
+60     py 9.7
+61 11  py 9.7
+62 12  py 9.7
+63 13  py 9.7
+64 14  py 9.7
+65 15  py 9.7
+c
+c reactor core surfaces
+70     px  44.9
+71 11  px  44.9
+72 12  px  44.9
+73 13  px  44.9
+74 14  px  44.9
+75 15  px  44.9
+76     pz -119.39
+77     pz  119.39
+78     cz  51.85
+c
+c reflector surfaces
+80     cz  65
+81     pz -140
+82     pz  140
+c
+83     cz  64.99
+84     pz -139.99
+85     pz  139.99
+c
+c problem boundary surfaces
+*1000 20 px 0
+*1001 21 py 0  
+c
+
+c      *****DATA CARDS*****
+c
+c      ===TRANSFORMATIONS===
+c
+c 60 degree rotations from +x
+*TR11  0 0 0    60   30   90    150  60   90    90 90 0    1
+*TR12  0 0 0    120  30   90    150  120  90    90 90 0    1
+*TR13  0 0 0    180  90   90    90   180  90    90 90 0    1
+*TR14  0 0 0    120  150  90    30   120  90    90 90 0    1
+*TR15  0 0 0    60   150  90    30   60   90    90 90 0    1
+c
+c shrink cell transformations; 0.00001 degree rotation
+c and 59.99999 degree rotation from +x
+*TR20  0 0 0     0.00001  89.99999 90  89.99999  0.00001 90  90 90 0 1
+*TR21  0 0 0    29.99999 119.99999 90  59.99999 29.99999 90  90 90 0 1 
+c
+c      ===BURN===
+c burn TIME=30 30 PFRAC=1 1 MAT=1
+c      omit=1 4 6014 7016 8018 9018
+c c      ===MATERIALS===
+c 20 wt% enriched UCO fuel kernels; according to INL AGR-2 specs
+m1     92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+c carbon dioxide
+m2     6000.66c 1
+       8016 2
+c
+c graphite
+m3     6000.66c 1
+mt3 GRPH.60c
+c
+c buffer carbon and inner/outer pyrolytic carbon layer
+m4     6000.66c 1 $ buffer
+m5     6000.66c 1 $ inner pyc
+m7     6000.66c 1 $ outer pyc
+c
+c silicon carbide layer
+m6     6000.66c 1
+       14000    1
+c
+c boron carbide shielding
+m8     5010     -0.28
+       5011     -0.52
+       6000.66c -0.20
+c
+c stainless steel, according to Sandia
+m9     06000.66c 0.006871
+       24050.80c 0.007816
+       24052.80c 0.150726
+       24053.80c 0.017091
+       24054.80c 0.004254
+       25055.80c 0.020030
+       26054.80c 0.042528
+       26056.80c 0.667595
+       26057.80c 0.015418
+       26058.80c 0.002052
+       28058.80c 0.044672
+       28060.80c 0.017207
+       28061.80c 0.000748
+       28062.80c 0.002385
+       28064.80c 0.000607
+c
+c tungsten
+m10    74000   1
+c
+c lead
+m11    82000   1
+c water
+m12    1001    2
+       8016    1
+c
+c Eu2O3 burnable poison from Eu151 and Eu152
+c density of 7.28 g/cc
+m20    63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+c      DEPLETION REGIONS
+c      numbering scheme: 10X fuel regions
+c                        20X burnable absorber regions
+c uranium fuel, 20wt% enriched
+m101   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+m102   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+m103   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+m104   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+m105   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c
+m106   92235     -0.1720
+       92238     -0.7169
+       6000.66c  -0.0178
+       8016      -0.0861
+c Eu2O3 burnable absorber
+m201   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+m202   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+m203   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+m204   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+m205   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+m206   63151   0.1912
+       63152   0.2088
+        8016   0.60
+c
+c      ===PARAMETERS===
+c
+mode   n
+kcode  1500 1.0 15 120
+ssw 80
+ksrc 0 0 0
+lost 1 
+c
+c      default print and dump; write MCTAL; limit run tape to 2 entries 
+prdmp  0 0 1 2 0
+c      ===SOURCES===
+c
+c      ===TALLIES===
+c energy bins use 1 lethargy width near thermal energies
+c                 2 lethargy width between 5eV 100keV
+c                 3 lethargy width > 100keV
+c      BE SURE TO CONVERT TO FLUX PER UNIT LETHARGY
+c      BE SURE TO OVERRIDE ENERGY BINS FOR NON-NEUTRON TALLIES
+e0     1.49E-10  1.75E-10  2.05E-10  2.40E-10  2.81E-10
+       3.29E-10  3.85E-10  4.50E-10  5.27E-10  6.18E-10
+       7.23E-10  8.47E-10  9.91E-10  1.16E-09  1.36E-09
+       1.59E-09  1.86E-09  2.18E-09  2.55E-09  2.99E-09
+       3.50E-09  4.10E-09  4.80E-09  5.62E-09  6.58E-09
+       7.71E-09  9.03E-09  1.06E-08  1.24E-08  1.45E-08
+       1.70E-08  1.99E-08  2.33E-08  2.72E-08  3.19E-08
+       3.73E-08  4.37E-08  5.12E-08  5.99E-08  7.02E-08
+       8.22E-08  9.62E-08  1.13E-07  1.32E-07  1.54E-07
+       1.81E-07  2.12E-07  2.48E-07  2.90E-07  3.40E-07
+       3.98E-07  4.66E-07  5.46E-07  6.39E-07  7.48E-07
+       8.76E-07  1.03E-06  1.20E-06  1.93E-06  3.10E-06
+       4.97E-06  7.98E-06  1.28E-05  2.06E-05  3.30E-05
+       5.30E-05  7.26E-05  9.96E-05  1.37E-04  1.87E-04
+       2.57E-04  3.52E-04  4.82E-04  6.61E-04  9.07E-04
+       1.24E-03  1.70E-03  2.34E-03  3.20E-03  4.39E-03
+       6.02E-03  8.25E-03  1.13E-02  1.55E-02  2.13E-02
+       2.92E-02  4.00E-02  5.48E-02  7.51E-02  1.03E-01
+       1.41E-01  2.27E-01  3.64E-01  5.84E-01  9.38E-01
+       1.51E+00  2.42E+00  3.88E+00  6.23E+00  1.00E+01
+c
+c reactor power peaking tallies
+c f1_4 where _ is the fuel assembly idx given below:
+c (symmetry is rotational)
+c      4 3 4
+c     3 2 2 3
+c    4 2 1 2 4
+c     3 2 2 3
+c      4 3 4
+c f114:n (1<20<22<50[ 0:4 -4 0] 50[-1:4 -3 0]
+c           50[-2:4 -2 0] 50[-3:4 -1 0]
+c 	  50[-4:4  0 0] 50[-4:3  1 0]
+c  	  50[-4:2  2 0] 50[-4:1  3 0]
+c 	  50[-4:0  4 0]
+c 	  < 60[0 0 0] < 70)
+c e114   20
+c sd114  0.00141863
+c fm114 -1 1 -6 -8
+c f124:n (1<20<22<50[ 0:4 -4 0] 50[-1:4 -3 0]
+c           50[-2:4 -2 0] 50[-3:4 -1 0]
+c 	  50[-4:4  0 0] 50[-4:3  1 0]
+c  	  50[-4:2  2 0] 50[-4:1  3 0]
+c 	  50[-4:0  4 0]
+c 	  < 60[1 0 0] < 70)
+c e124   20
+c sd124  0.00141863
+c fm124 -1 1 -6 -8
+c f134:n (1<20<22<50[ 0:4 -4 0] 50[-1:4 -3 0]
+c           50[-2:4 -2 0] 50[-3:4 -1 0]
+c 	  50[-4:4  0 0] 50[-4:3  1 0]
+c  	  50[-4:2  2 0] 50[-4:1  3 0]
+c 	  50[-4:0  4 0]
+c 	  < 60[2 -1 0] < 70)
+c e134   20
+c sd134  0.00141863
+c fm134 -1 1 -6 -8
+c f144:n (1<20<22<50[ 0:4 -4 0] 50[-1:4 -3 0]
+c           50[-2:4 -2 0] 50[-3:4 -1 0]
+c 	  50[-4:4  0 0] 50[-4:3  1 0]
+c  	  50[-4:2  2 0] 50[-4:1  3 0]
+c 	  50[-4:0  4 0]
+c 	  < 60[2 0 0] < 70)
+c e144   20
+c sd144  0.00141863
+c fm144 -1 1 -6 -8
+c c
+c f154:n (1<20<21[0 0 -99:99]<22<50[ 0:4 -4 0] 50[-1:4 -3 0]
+c           50[-2:4 -2 0] 50[-3:4 -1 0]
+c  	  50[-4:4  0 0] 50[-4:3  1 0]
+c   	  50[-4:2  2 0] 50[-4:1  3 0]
+c  	  50[-4:0  4 0]
+c  	  < 60[0 0 0] < 70)
+c e144   20
+c sd144  0.00141863
+c fm144 -1 1 -6 -8
+c c      ===MESH TALLIES===

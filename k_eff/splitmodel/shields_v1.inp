@@ -1,0 +1,62 @@
+P.R.I.M.E. Radiation Protection System v1
+c by AJ Fleming
+c 27.1.2020
+c
+c     *****CELL CARDS*****
+
+c     *****SURFACE CARDS*****
+c
+c reflector surfaces
+80     cz  65
+81     pz -140
+82     pz  140
+c
+c reactor vessel surfaces
+90     cz  80  
+91     pz -150
+92     pz  150
+c
+c b4c shielding surfaces
+100    cz  90 $outer b4c surface
+101    pz -170
+102    pz  170
+c
+c tungsten shielding surfaces
+110    cz  100 $outer tungsten surface
+111    pz -180
+112    pz  180
+c
+c container lead shield inner surfaces
+120    px -100
+121    px  100
+122    py -100
+123    py  100
+124    pz -600
+125    pz  600
+c
+c container inner surfaces
+130    px -150
+131    px  150
+132    py -150
+133    py  150
+134    pz -650
+135    pz  650
+c
+c container outer surfaces
+140    px -152.7
+141    px  152.7
+142    py -152.7
+143    py  152.7
+144    pz -652.7
+145    pz  652.7
+c
+
+c     *****DATA CARDS*****
+c
+c     ===TRANSFORMATIONS===
+c
+c     ===MATERIALS===
+c
+c     ===TALLIES===
+c
+c     ===MESH TALLIES===
