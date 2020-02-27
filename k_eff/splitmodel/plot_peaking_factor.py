@@ -9,7 +9,7 @@ from statistics import mean
 from math import sin, cos, pi
 
 j_hat = [1, 0]
-i_hat = [0.5, -0.86603]
+i_hat = [0.5, -0.866]
 
 core_i_hat = [0.86603, 0.5]
 core_j_hat = [0, 1]
@@ -73,9 +73,15 @@ mean_power = mean(nonzero)
 adjusted_power = [k/mean_power for k in power_tally]
 print(max(adjusted_power))
 
+coolant_idx = [i for i in range(len(power_tally)) if power_tally[i] == 0]
+coolant_idx.reverse()
 xy_list = np.dot(assm_basis, np.array(assm_ij).transpose())
+for k in coolant_idx:
+    x.pop(k)
+    y.pop(k)
+    adjusted_power.pop(k)
 fig, ax = plot.subplots()
-scattered = ax.scatter(x, y, c=adjusted_power, cmap=cm.jet, s=128, marker="h")
+scattered = ax.scatter(x, y, c=adjusted_power, cmap=cm.jet, s=121, marker="h")
 colorbar = fig.colorbar(scattered, ax=ax)
 
 ax.set_xlabel("x-position in core", fontsize=16)
@@ -83,5 +89,5 @@ ax.set_ylabel("y-position in core", fontsize=16)
 ax.set_aspect('equal')
 colorbar.ax.set_ylabel("Peaking Factor", fontsize=14)
 ax.set_title("Peaking Factor Plot for the PRIME Core", fontsize=20)
-fig.tight_layout()
+
 plot.show()
