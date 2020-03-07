@@ -88,6 +88,7 @@ for k in coolant_idx:
     x.pop(k)
     y.pop(k)
     adjusted_power.pop(k)
+print(len(adjusted_power))
 fig, ax = plot.subplots()
 scattered = ax.scatter(x, y, c=adjusted_power, cmap=cm.jet, s=121, marker="h")
 colorbar = fig.colorbar(scattered, ax=ax)

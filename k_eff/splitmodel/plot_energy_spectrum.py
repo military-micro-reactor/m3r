@@ -6,7 +6,7 @@ import matplotlib.pyplot as plot
 from matplotlib import cm
 from statistics import mean
 
-tally204 = tallyfile.GetTally(204)
+tally204 = tallyfile.GetTally(34)
 
 ebins = tally204.GetEBins()
 # F D U S M C E T

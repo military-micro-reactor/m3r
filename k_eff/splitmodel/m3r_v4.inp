@@ -29,11 +29,13 @@ c      default INL TRISO particle
 3      5 -1.90    2 -3   imp:n=1  u=1 $ inner pyc
 4      6 -3.19    3 -4   imp:n=1  u=1 $ silicon carbide layer
 5      7 -1.90    4 -5   imp:n=1  u=1 $ outer pyc
+       vol=8.3535e-5
 6      3 -1.80    5      imp:n=1  u=1 $ graphite binder
 c
 c
 c      BURNABLE ABSORBER PARTICLE, EUROPIUM LAYER THICKNESS 10 um
-11      1  -10.4   -1      imp:n=1  u=30 $ fuel kernel
+c 11      1  -10.4   -1      imp:n=1  u=30 $ fuel kernel
+c         vol=0.00141863
 12      20 -7.28    1 -7   imp:n=1  u=30 $ burnable poison layer
 13      4  -1.05    7 -2   imp:n=1  u=30 $ buffer carbon
 14      5  -1.90    2 -3   imp:n=1  u=30 $ inner pyc
@@ -452,8 +454,9 @@ c and 59.99999 degree rotation from +x
 *TR21  0 0 0    29.99999 119.99999 90  59.99999 29.99999 90  90 90 0 1 
 c
 c      ===BURN===
-c burn TIME=30 30 PFRAC=1 1 MAT=1
-c      omit=1 4 6014 7016 8018 9018
+burn TIME=250 250 250 250 PFRAC=1 1 1 1  MAT=1 POWER=10
+     MATVOL=3.33384e5
+     omit=1 4 6014 7016 8018 9018
 c c      ===MATERIALS===
 c 20 wt% enriched UCO fuel kernels; according to INL AGR-2 specs
 m1     92235     -0.1720
@@ -576,7 +579,7 @@ c
 c      ===PARAMETERS===
 c
 mode   n
-kcode  2000 1.0 15 200
+kcode  50000 1.0 40 290
 ksrc 0 0 0
 lost 1 
 c
@@ -652,10 +655,11 @@ c e144   20
 c sd144  0.00141863
 c fm144 -1 1 -6 -8
 c
-f204:n (1<20<21[0 0 -99:99]<22<50<60[0 0 0]< 70)
-e204 20
-sd204 0.00141863
-fm204 -1 1 -6 -8
-fc204 axial peaking factor tally in the hot assembly
-c      ===MESH TALLIES===
+c f204:n (1<20<21[0 0 -99:99]<22<50<60[0 0 0]< 70)
+c e204 20
+c sd204 0.00141863
+c fm204 -1 1 -6 -8
+c fc204 axial peaking factor tally in the hot assembly
+c f34:n 82
+c c      ===MESH TALLIES===
 c

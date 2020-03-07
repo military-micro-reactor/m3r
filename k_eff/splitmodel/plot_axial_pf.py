@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from mcnptools import Mctal
-tallyfile = Mctal("axial_peaking_tally_1.3.20")
+tallyfile = Mctal("axial_peaking_tally")
 
 import numpy as np
 import matplotlib.pyplot as plot
@@ -24,9 +24,14 @@ def cosine_fit_func(x, a, b):
 fit_params, fit_cov = optimize.curve_fit(cosine_fit_func,
                                          x, data,
                                          p0=[1, 0.001])
+print(max(data))
 print(fit_params)
 fig, ax = plot.subplots()
-ax.scatter(x, data, marker='+')
 ax.plot(x, cosine_fit_func(x, fit_params[0], fit_params[1]),
-        color='tab:red')
+        color='tab:red', label="Axial Peaking Factor, cosine fit", linewidth=4)
+ax.scatter(x, data, marker='+')
+ax.set_xlabel("z-position in center assembly [cm]", fontsize=16)
+ax.set_ylabel("Axial peaking factor", fontsize=16)
+ax.tick_params(axis='both', which='major', labelsize=14)
+ax.legend()
 plot.show()
