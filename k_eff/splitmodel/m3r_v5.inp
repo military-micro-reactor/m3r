@@ -30,7 +30,7 @@ c      first digit: matches original, default cell number
 c      second digit: 0 for fuel particle, 1 for burnable absorber particle
 c      third digit: depletion region
 c      default INL TRISO particle
-1      999 -10.4   -1      imp:n=1  u=1 vol=1.8915e-3 $ fuel kernel
+1      1 -10.4   -1      imp:n=1  u=1 vol=1.8915e-3 $ fuel kernel
 2      4 -1.05    1 -2   imp:n=1  u=1 $ buffer carbon
 3      5 -1.90    2 -3   imp:n=1  u=1 $ inner pyc
 4      6 -3.19    3 -4   imp:n=1  u=1 $ silicon carbide layer
@@ -47,7 +47,7 @@ c
 202    LIKE 2 BUT u=32
 203    LIKE 2 BUT u=33
 204    LIKE 2 BUT u=34
-qc
+c
 301    LIKE 3 BUT u=31
 302    LIKE 3 BUT u=32
 303    LIKE 3 BUT u=33
@@ -70,7 +70,7 @@ c
 c
 c
 c      BURNABLE ABSORBER PARTICLE, EUROPIUM LAYER THICKNESS 10 um
-c 11      999  -10.4   -1      imp:n=1  u=30 $ fuel kernel
+c 11      1  -10.4   -1      imp:n=1  u=30 $ fuel kernel
 c         vol=0.00141863
 c 12      20 -7.28    1 -7   imp:n=1  u=30 $ burnable poison layer
 c 13      4  -1.05    7 -2   imp:n=1  u=30 $ buffer carbon
@@ -79,7 +79,7 @@ c 15      6  -3.19    3 -4   imp:n=1  u=30 $ silicon carbide layer
 c 16      7  -1.90    4 -5   imp:n=1  u=30 $ outer pyc
 c 17      3  -1.80    5      imp:n=1  u=30 $ graphite binder
 c
-c      
+c      DEPLETION REGIONS
 c
 c      fuel particle lattice cell
 20     3 -1.80   -10 11 -12 13 -14 15   imp:n=1 u=2
@@ -332,7 +332,7 @@ c
           80 80 80 80  70 5  70 70 5  70  80
 	   80 80 80  70 70 70 70 70 70 70  80
 	    80 80  70 70 70 70 70 70 70 70  80
-	     80  70 5  70 70 5  70 70 5  70  80
+	     80  70 5  70 70 5  70 70 5 70  80
 	      80  70 70 70 70 70 70 70 70  80 80
 	       80  70 70 70 70 70 70 70  80 80 80
 	        80  70 5  70 70 5  70  80 80 80 80
@@ -383,21 +383,19 @@ c
 c
 c      ALL CONTROL ASSEMBLIES ARE IN REGION 2
 c      control assembly lattice cell
-c      RODS OUT MODELED AS COOLANT CHANNEL
-c      FIX LOST PARTICLES AND CHANGE BACK IF YOU WANT IT TO WORK
 55     3 -1.80   -50 -53 -51 -54 -52 -55 imp:n=1 u=20 lat=2
                                          fill=-5:5 -5:5 0:0
 c
         20 20 20 20 20 20 20 20 20 20 20
          20 20 20 20 20  71 71 71 71 71  20
-          20 20 20 20  71 5  71 71 5  71  20
-	   20 20 20  71 71 71 71 71 71 71  20
-	    20 20  71 71 5  71 71 71 71 71  20
-	     20  71 5  71 71 5  71 71 5  71  20
-	      20  71 71 71 71 71 71 71 71  20 20
-	       20  71 71 71 5  71 71 71  20 20 20
-	        20  71 5  71 71 5  71  20 20 20 20
-	         20  71 71 71 71 71  20 20 20 20 20
+          20 20 20 20   71 5  71 71 5  71  20
+	   20 20 20    71 71 71 71 71 71 71  20
+	    20 20     71 71 9  71 71 71 71 71  20
+	     20      71 5  71 71 5  71 71 5 71  20
+	      20      71 71 71 71 71 71 71 71  20 20
+	       20      71 71 71 9  71 71 71  20 20 20
+	        20      71 5  71 71 5  71  20 20 20 20
+	         20      71 71 71 71 71  20 20 20 20 20
                   20 20 20 20 20 20 20 20 20 20 20
 c
 c      control assembly lattice cell 2
@@ -406,14 +404,14 @@ c      control assembly lattice cell 2
 c
         21 21 21 21 21 21 21 21 21 21 21
          21 21 21 21 21  71 71 71 71 71  21
-          21 21 21 21  71 5  71 71 5  71  21
-	   21 21 21  71 71 71 71 71 71 71  21
-	    21 21  71 71 5  71 71 5  71 71  21
-	     21  71 5  71 71 5  71 71 5  71  21
-	      21  71 71 71 71 71 71 71 71  21 21
-	       21  71 71 71 71 71 71 71  21 21 21
-	        21  71 5  71 71 5  71  21 21 21 21
-	         21  71 71 71 71 71  21 21 21 21 21
+          21 21 21 21   71 5 71 71 5 71  21
+	   21 21 21    71 71 71 71 71 71 71  21
+	    21 21     71 71 9 71 71 9 71 71  21
+	     21      71 5 71 71 5 71 71 5 71  21
+	      21      71 71 71 71 71 71 71 71  21 21
+	       21      71 71 71 71 71 71 71  21 21 21
+	        21      71 5 71 71 5 71  21 21 21 21
+	         21      71 71 71 71 71  21 21 21 21 21
                   21 21 21 21 21 21 21 21 21 21 21
 c
 c      control assembly lattice cell 3
@@ -422,27 +420,27 @@ c      control assembly lattice cell 3
 c
         22 22 22 22 22 22 22 22 22 22 22
          22 22 22 22 22  71 71 71 71 71  22
-          22 22 22 22  71 5  71 71 5  71  22
-	   22 22 22  71 71 71 71 71 71 71  22
-	    22 22  71 71 71 71 71 5  71 71  22
-	     22  71 5  71 71 5  71 71 5  71  22
-	      22  71 71 71 71 71 71 71 71  22 22
-	       22  71 71 71 5  71 71 71  22 22 22
-	        22  71 5  71 71 5  71  22 22 22 22
-	         22  71 71 71 71 71  22 22 22 22 22
+          22 22 22 22   71 5 71 71 5 71  22
+	   22 22 22    71 71 71 71 71 71 71  22
+	    22 22     71 71 71 71 71 9 71 71  22
+	     22      71 5 71 71 5 71 71 5 71  22
+	      22      71 71 71 71 71 71 71 71  22 22
+	       22      71 71 71 9 71 71 71  22 22 22
+	        22      71 5 71 71 5 71  22 22 22 22
+	         22      71 71 71 71 71  22 22 22 22 22
                   22 22 22 22 22 22 22 22 22 22 22
 c
 c      reactor core lattice cell
 60     3 -1.80   -60 -63 -61 -64 -62 -65 imp:n=1 u=7
                                          lat=2
 					 fill=-3:3 -3:3 0:0
-        7  7  7  7  7  7  7
-	 7 7 7  82 83 82   7
+        7 7 7 7 7 7 7
+	 7 7 7  82 83 82  7
 	  7 7  83 81 22 83  7
-	   7  82 21 80 81 82 7
+	   7  82 21 80 81 82  7
 	    7  83 81 20 83  7 7
-	     7  82 83 82  7  7 7
-	      7  7  7  7  7   7 7
+	     7  82 83 82  7 7 7
+	      7 7 7 7 7 7 7
 c
 c      reactor core cell
 c                reactor core boundary    top/bot   shrink cell
@@ -627,9 +625,6 @@ c density of 7.28 g/cc
 m20    63151   0.1912
        63152   0.2088
         8016   0.60
-c
-c filler hydrogen material
-m999 1001 1
 c
 c      DEPLETION REGIONS
 c      numbering scheme: 10X fuel regions
